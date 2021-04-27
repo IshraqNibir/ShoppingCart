@@ -5,3 +5,6 @@ from django.http import HttpResponse
 
 def home(request):
     return render(request, 'shopapp/home.html')
+
+def order(request):
+    return render(request, 'shopapp/order.html')
