@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Order
 from .forms import OrderForm
 from django.views.decorators.csrf import csrf_exempt
-from .models import Products
+from .models import Products, Order
 from django.template import loader
 
 # Create your views here.
@@ -27,4 +27,12 @@ def order(request):
         if f.is_valid():
             order_data = f.save()
         message = "Product Added To The Cart"
+    return HttpResponse(template.render(context, request))
+
+def confirm(request):
+    orders = Order.objects.all()
+    template = loader.get_template('shopapp/confirm.html')
+    context = {
+        'orders': orders,
+    }
     return HttpResponse(template.render(context, request))
