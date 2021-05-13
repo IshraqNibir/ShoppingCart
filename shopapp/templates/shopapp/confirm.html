@@ -20,12 +20,6 @@
     </head>
     <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-light bg-light static-top">
-            <div class="container">
-                <a class="navbar-brand" href="#!">Pythonista Shopping</a>
-                <a class="btn btn-primary" href="#!">Go To Cart</a>
-            </div>
-        </nav>
         <!-- Masthead-->
         <header class="masthead text-white text-center">
             <div class="overlay"></div>
@@ -33,16 +27,23 @@
                 <div class="row">
                     <div class="col-xl-9 mx-auto"><h1 class="mb-5">Your Selected Products</h1></div>
                     <div class="" style="padding-left: 250px;">
-                        <form method="POST" action="/order" enctype="multipart/form-data">
+                        <form method="POST" action="/confirm" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="row">
-                                <div class="column" style="padding-left: 130px; color: black;" ><h3>Products</h3></div>
-                                <div class="column" style="padding-left: 130px; color: black;"><h3>Quantity</h3></div>
-                                    <div class="col-12 col-md-9 mb-2 mb-md-0">
-                                        <span class="" style="color: black;">Ishraq</span>
-                                        <span class="" style="color: black;">Ahmed</span>
-                                    </div>
+                                <div class="column" style="padding-left: 130px; color: black;" >
+                                    <h3>Products</h3>
+                                    {% for order in orders %}
+                                        <p class="" style="color: black;">{{ order.product }}</p>
+                                    {% endfor %}
+                                </div>
+                                <div class="column" style="padding-left: 130px; color: black;">
+                                    <h3>Quantity</h3>
+                                    {% for order in orders %}
+                                        <p class="" style="color: black;">{{ order.quantity }}</p>
+                                    {% endfor %}
+                                </div>
                             </div>
+                            <div class="col-12 col-md-9 mb-2 mb-md-0" style="margin-top: 10px; margin-left: 120px;"><button class="btn btn-block btn-lg btn-primary" id="mybutton">Place Order</button></div>
                         </form>
                     </div>
                 </div>
@@ -61,7 +62,7 @@
 <script>
 
     function showMessage() {
-        window.alert("Product will be added to Cart.");
+        window.alert("The Order will be placed.");
     }
 
     var cart = document.getElementById("mybutton");

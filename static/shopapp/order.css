@@ -2108,8 +2108,8 @@ textarea.form-control {
 .form-row {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -5px;
-  margin-left: -5px;
+  margin-right: -86px;
+  margin-left: 111px;
 }
 .form-row > .col,
 .form-row > [class*=col-] {
@@ -10042,6 +10042,7 @@ header.masthead .overlay {
 }
 header.masthead h1 {
   font-size: 2rem;
+  margin-top: -150px;
 }
 @media (min-width: 768px) {
   header.masthead {
