@@ -12,9 +12,6 @@ class Products(models.Model):
         return self.product_name
 
 class Order(models.Model):
-    email = models.EmailField(blank=False)
-    phone = models.CharField(max_length=20, blank=False)
-    name = models.CharField(max_length=100, blank=False)
     product = models.CharField(max_length=100, blank=False)
     quantity = models.PositiveIntegerField(blank=False)
     unit_price = models.PositiveIntegerField(default=0)
@@ -26,3 +23,9 @@ class History(models.Model):
     name = models.CharField(max_length=100, blank=False)
     product = models.CharField(max_length=100, blank=False)
     quantity = models.PositiveIntegerField(blank=False)
+
+
+class EmployeeInformation(models.Model):
+    email = models.EmailField(blank=False)
+    phone = models.CharField(max_length=20, blank=False)
+    name = models.CharField(max_length=100, blank=False)
