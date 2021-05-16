@@ -15,7 +15,8 @@ from barcode.writer import SVGWriter
 import base64
 import random
 
-increment = 1
+first_order_id = None
+total_amount = 0
 
 # Create your views here.
 
@@ -35,6 +36,7 @@ def order(request):
         if not request.POST._mutable:
             request.POST._mutable = True
         data = request.POST
+        print(data)
         post_product = data.get('product')
         product_unit_price = Products.objects.get(product_name=post_product)
         if product_unit_price.quantity < int(data.get('quantity')):
@@ -66,6 +68,8 @@ def confirm(request):
     context = {
         'orders': orders,
     }
+    if len(orders) == 0:
+        context['message'] = "No Products In The Cart.Go Back and Select Some Products."
     return HttpResponse(template.render(context, request))
 
 
@@ -97,21 +101,35 @@ def get_invoice(request,  *args, **kwargs):
     print(filename)
     
     img.save(filename)
+    skip = False
+    global first_order_id
+    local_total_price = 0
+    global total_amount
 
     for order in orders:
+        if skip == False:
+            first_order_id = order.id
+            total_amount = 0
+            skip = True
+        total_amount = total_amount + order.total_price
         history = History(
             email=employee.email,
             phone=employee.phone,
             name=employee.name,
             product=order.product,
-            quantity=order.quantity
+            quantity=order.quantity,
+            order_id=order.id,
+            unit_price=order.unit_price,
+            total_price=order.total_price
         )
         history.save()
 
+    latest_orders = History.objects.all().filter(order_id__gte=first_order_id)
     Order.objects.all().delete()
 
     context = {
-        'orders': orders,
+        'orders': latest_orders,
+        'total_amount': total_amount,
         'img': employee.phone + str(ran_int) + '.jpg',
     }
     pdf = render_to_pdf('shopapp/invoice.html', context)

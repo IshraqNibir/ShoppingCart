@@ -30,25 +30,38 @@
             <div class="overlay"></div>
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-9 mx-auto"><h1 class="mb-5">Your Selected Products</h1></div>
+                    <div class="col-xl-9 mx-auto">
+                        <h1 class="mb-5">Your Selected Products</h1>
+                        {% if message %}
+                            <h6 style="color: darkred;">{{ message }}</h6>
+                        {% endif %}
+                    </div>
                     <div class="" style="padding-left: 250px;">
                         <form method="POST" action="/confirm" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="row">
-                                <div class="column" style="padding-left: 130px; color: black;" >
+                                <div class="column" style="padding-left: 80px; color: black;" >
                                     <h3>Products</h3>
                                     {% for order in orders %}
                                         <p class="" style="color: black;">{{ order.product }}</p>
                                     {% endfor %}
                                 </div>
-                                <div class="column" style="padding-left: 130px; color: black;">
+                                <div class="column" style="padding-left: 80px; color: black;">
                                     <h3>Quantity</h3>
                                     {% for order in orders %}
                                         <p class="" style="color: black;">{{ order.quantity }}</p>
                                     {% endfor %}
                                 </div>
+                                <div class="column" style="padding-left: 80px; color: black;">
+                                    <h3>Unit Price</h3>
+                                    {% for order in orders %}
+                                        <p class="" style="color: black;">{{ order.unit_price }}</p>
+                                    {% endfor %}
+                                </div>
                             </div>
-                            <div class="col-12 col-md-9 mb-2 mb-md-0" style="margin-top: 10px; margin-left: 120px;"><a class="btn btn-block btn-lg btn-primary" id="mybutton" href="get_invoice">Place Order</a></div>
+                            {% if not message %}
+                                <div class="col-12 col-md-9 mb-2 mb-md-0" style="margin-top: 10px; margin-left: 120px;"><a class="btn btn-block btn-lg btn-primary" id="mybutton" href="get_invoice">Place Order</a></div>
+                            {% endif %}
                         </form>
                     </div>
                 </div>

@@ -23,6 +23,9 @@ class History(models.Model):
     name = models.CharField(max_length=100, blank=False)
     product = models.CharField(max_length=100, blank=False)
     quantity = models.PositiveIntegerField(blank=False)
+    order_id = models.PositiveIntegerField(blank=False)
+    unit_price = models.PositiveIntegerField(default=0)
+    total_price = models.PositiveIntegerField(default=0)
 
 
 class EmployeeInformation(models.Model):
