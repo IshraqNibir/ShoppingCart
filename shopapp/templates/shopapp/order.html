@@ -44,7 +44,7 @@
                             <div class="form-row">
                                 <div class="col-12 col-md-9 mb-2 mb-md-0" style="margin-top: 10px;">
                                     <select class="form-control form-control-lg" name="product" id="product">
-                                        <option value="">Select Product</option>
+                                        <option value="SelectedProduct">Select Product</option>
                                         {% for product in products %}
                                             <option value="{{product.product_name}}" name="product"> {{product.product_name}} </option>
                                         {% endfor %}

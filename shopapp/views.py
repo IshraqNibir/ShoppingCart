@@ -20,9 +20,11 @@ total_amount = 0
 
 # Create your views here.
 
+# This function is for viewing the home page
 def home(request):
     return render(request, 'shopapp/home.html')
 
+#This function is used for storing the orders from a particular customer
 @csrf_exempt
 def order(request):
     form = OrderForm()
@@ -36,20 +38,25 @@ def order(request):
         if not request.POST._mutable:
             request.POST._mutable = True
         data = request.POST
-        print(data)
         post_product = data.get('product')
-        product_unit_price = Products.objects.get(product_name=post_product)
-        if product_unit_price.quantity < int(data.get('quantity')):
-            context['message'] = "Stock Shortage!! The Quantity Of The Selected Product Must Be Less Than " + str(product_unit_price.quantity)
+        if post_product == "SelectedProduct":
+            context["message"] = "Please Select a Product"
+            return HttpResponse(template.render(context, request))
+        particular_product = Products.objects.get(product_name=post_product)
+        if particular_product.quantity < int(data.get('quantity')):
+            context['message'] = "Stock Shortage!! The Quantity Of The Selected Product Must Be Less Than " + str(particular_product.quantity)
             return HttpResponse(template.render(context, request))
 
-        data['unit_price'] = product_unit_price.unit_price
-        data['total_price'] = product_unit_price.unit_price * int(data['quantity'])
+        data['unit_price'] = particular_product.unit_price
+        data['total_price'] = particular_product.unit_price * int(data['quantity'])
+        particular_product.quantity = particular_product.quantity - int(data.get('quantity'))
+        particular_product.save()
         f = OrderForm(data)
         if f.is_valid():
             order_data = f.save()
     return HttpResponse(template.render(context, request))
 
+#This function is used for confirming the orders that are in the cart
 def confirm(request):
     orders = Order.objects.all()
     template = loader.get_template('shopapp/confirm.html')
@@ -72,7 +79,7 @@ def confirm(request):
         context['message'] = "No Products In The Cart.Go Back and Select Some Products."
     return HttpResponse(template.render(context, request))
 
-
+#This function is used for the final output...which is a pdf invoice and consists of qrcode information of the customer
 def get_invoice(request,  *args, **kwargs):
     orders = Order.objects.all()
     employee = EmployeeInformation.objects.first()
@@ -135,6 +142,7 @@ def get_invoice(request,  *args, **kwargs):
     pdf = render_to_pdf('shopapp/invoice.html', context)
     return HttpResponse(pdf, content_type='application/pdf')
 
+#This function is used for storing the employee information
 def employee_information(request):
     if request.method == 'POST':
         EmployeeInformation.objects.all().delete()
