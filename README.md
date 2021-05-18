@@ -3,20 +3,20 @@
 This is a project where an user can enter his information and buy products. After buying his needs an invoice will be generated with qr code.
 
 
-TECHNOLOGY USED:
+# TECHNOLOGY USED:
 1. Python(django)
 2. DBSQLITE
 3. HTML,CSS
 4. Javascript
 
 
-ADMIN MANUAL:
+# ADMIN MANUAL:
 1. The admin must create a superuser for inserting data in the products table.
 2. The products that the customer/user will get, it will come from the products table that the superuser inserts.
 3. There is a history model which stores all the information for future needs.
 
 
-USER MANUAL:
+# USER MANUAL:
 1. After starting the project there is a home page, which consists the information of the company (bla bla bla).
 2. From the home page user has to click 'Buy Items' to buy his daily needs.
 3. After that the user will be redirected to the page where he has to enter his own information(Name, Email, Phone). All the fields are mandatory.
