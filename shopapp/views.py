@@ -14,6 +14,7 @@ from io import BytesIO
 from barcode.writer import SVGWriter
 import base64
 import random
+import os
 
 first_order_id = None
 total_amount = 0
@@ -89,6 +90,9 @@ def confirm(request):
 def get_invoice(request,  *args, **kwargs):
     orders = Order.objects.all()
     employee = EmployeeInformation.objects.first()
+    project_path = os.getcwd()
+    project_path = project_path + '\static'
+    print(project_path)
 
     qr = qrcode.QRCode(
         version = 1,
@@ -141,6 +145,7 @@ def get_invoice(request,  *args, **kwargs):
         'orders': latest_orders,
         'total_amount': total_amount,
         'img': employee.phone + str(ran_int) + '.jpg',
+        'project_path': project_path
     }
     pdf = render_to_pdf('shopapp/invoice.html', context)
     return HttpResponse(pdf, content_type='application/pdf')
