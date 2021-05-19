@@ -4,7 +4,7 @@ This is a project where an user can enter his information and buy products. Afte
 
 # RUNNING PROJECT LOCALLY
 Follow The below mentioned steps serially:
-1. Open terminal inside the folder you want the project and run command "git clone -b master https://github.com/IshraqNibir/ShoppingCart.git"
+1. Open terminal where you want the project and run command "git clone -b master https://github.com/IshraqNibir/ShoppingCart.git"
 2. create a virtual environment and install the requirements on that environment by "pip install -r requirements.txt"
 3. Then for the database migrations use "python manage.py makemigrations"
 4. And after that use "python manage.py migrate"
