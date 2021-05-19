@@ -15,6 +15,7 @@ from barcode.writer import SVGWriter
 import base64
 import random
 import os
+import platform
 
 first_order_id = None
 total_amount = 0
@@ -90,8 +91,10 @@ def confirm(request):
 def get_invoice(request,  *args, **kwargs):
     orders = Order.objects.all()
     employee = EmployeeInformation.objects.first()
+    os_name = platform.system()
+    print(os_name)
     project_path = os.getcwd()
-    project_path = project_path + '\static'
+    project_path = project_path + '/static'
     print(project_path)
 
     qr = qrcode.QRCode(
