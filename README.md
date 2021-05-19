@@ -8,7 +8,8 @@ Follow The below mentioned steps serially:
 2. create a virtual environment and install the requirements on that environment by "pip install -r requirements.txt"
 3. Then for the database migrations use "python manage.py makemigrations"
 4. And after that use "python manage.py migrate"
-5. Finally run the project by "python manage.py runserver"
+5. Use "python manage.py collectstatic"
+6. Finally run the project by "python manage.py runserver"
 
 # TECHNOLOGY USED:
 1. Python(django)
@@ -20,7 +21,8 @@ Follow The below mentioned steps serially:
 # ADMIN MANUAL:
 1. The admin must create a superuser for inserting data in the products table.
 2. The products that the customer/user will get, it will come from the products table that the superuser inserts.
-3. There is a history model which stores all the information for future needs.
+3. As the users will buy a certain amount of products the quantity will be decreased and admin has to add the quantity for that particular product.
+4. There is a history model which stores all the information for future needs.
 
 
 # USER MANUAL:
