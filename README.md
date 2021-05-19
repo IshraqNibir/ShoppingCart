@@ -20,9 +20,10 @@ Follow The below mentioned steps serially:
 
 # ADMIN MANUAL:
 1. The admin must create a superuser for inserting data in the products table.
-2. The products that the customer/user will get, it will come from the products table that the superuser inserts.
-3. As the users will buy a certain amount of products the quantity will be decreased and admin has to add the quantity for that particular product.
-4. There is a history model which stores all the information for future needs.
+2. After creating the superuser the admin must add products from the admin panel.
+3. The products that the customer/user will get, it will come from the products table that the superuser inserts.
+4. As the users will buy a certain amount of products the quantity will be decreased and admin has to add the quantity for that particular product.
+5. There is a history table in the database which stores all the information for future needs.
 
 
 # USER MANUAL:
