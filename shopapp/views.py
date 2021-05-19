@@ -24,6 +24,8 @@ total_amount = 0
 def home(request):
     return render(request, 'shopapp/home.html')
 
+
+
 #This function is used for storing the orders from a particular customer
 @csrf_exempt
 def order(request):
@@ -56,6 +58,8 @@ def order(request):
             order_data = f.save()
     return HttpResponse(template.render(context, request))
 
+
+
 #This function is used for confirming the orders that are in the cart
 def confirm(request):
     orders = Order.objects.all()
@@ -79,13 +83,12 @@ def confirm(request):
         context['message'] = "No Products In The Cart.Go Back and Select Some Products."
     return HttpResponse(template.render(context, request))
 
+
+
 #This function is used for the final output...which is a pdf invoice and consists of qrcode information of the customer
 def get_invoice(request,  *args, **kwargs):
     orders = Order.objects.all()
     employee = EmployeeInformation.objects.first()
-
-    if request.method == 'GET':
-        print("Hello Nibir")
 
     qr = qrcode.QRCode(
         version = 1,
@@ -101,7 +104,7 @@ def get_invoice(request,  *args, **kwargs):
     qr.add_data(data)
     qr.make(fit=True)
 
-    # # Create an image from the QR Code instance
+    # Create an image from the QR Code instance
     img = qr.make_image()
     ran_int = random.randint(1, 10000000)
     filename = "static/" + employee.phone + str(ran_int) + ".jpg"
@@ -141,6 +144,8 @@ def get_invoice(request,  *args, **kwargs):
     }
     pdf = render_to_pdf('shopapp/invoice.html', context)
     return HttpResponse(pdf, content_type='application/pdf')
+
+
 
 #This function is used for storing the employee information
 def employee_information(request):

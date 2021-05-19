@@ -30,7 +30,7 @@ Follow The below mentioned steps serially:
 4. After the successful entrance of the information of the user he will be redirected to the page where he can select the product and quantity that he wants to   buy.
 5. If the user put the quantity more than the stock of that particular product then a message will be given.
 6. After selecting the product and quantity it will be added to cart. User can add as many products as he wants to the cart.
-7. After adding users neccessary products to the cart he can find out from the cart which products he selected and how much the quantity is.
+7. After adding users neccessary products to the cart he can find out from the cart which products he selected and how much the quantity is by clicking Go To Cart.
 8. Then he can confirm the order and an invoice will be generated.
 9. The invoice will be in the pdf format and there is also an qr code in the invoice which consists of the information of the user.
 10. User can download the pdf invoice for further reference.
