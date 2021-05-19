@@ -8,7 +8,7 @@ Follow The below mentioned steps serially:
 2. create a virtual environment and install the requirements on that environment by "pip install -r requirements.txt"
 3. Then for the database migrations use "python manage.py makemigrations"
 4. And after that use "python manage.py migrate"
-5. Use "Python manage.py collectstatic"
+5. Use "python manage.py collectstatic"
 6. Finally run the project by "python manage.py runserver"
 
 # TECHNOLOGY USED:
